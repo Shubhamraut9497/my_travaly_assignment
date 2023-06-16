@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import "./GuestLove.css";
-import parseJSON from "date-fns/parseJSON/index";
 import { Link } from "react-router-dom";
 function GeuestLove() {
   const [popular_Stay, setPopular_stay] = useState([]);
@@ -31,6 +30,7 @@ function GeuestLove() {
         }),
       });
       const response = await data.json();
+      // const sortData=sortPopularStay(response,select_sort);
       setPopular_stay(response);
     };
     searchData();
@@ -41,6 +41,32 @@ function GeuestLove() {
   const handleChange = (e) => {
     setSelect_sort(e.target.value);
   };
+  // function sortPopularStay(data, sortOption) {
+  //   let sortedData = [...data];
+
+  //   if (sortOption === "Popular Hotels") {
+  //     sortedData.sort((a, b) =>
+  //       a.googleReview?.data?.totalUserRating > b.googleReview?.data?.totalUserRating ? -1 : 1
+  //     );
+  //   } else if (sortOption === "Price and Recommended") {
+  //     sortedData.sort((a, b) => {
+  //       const aPrice = a.staticPrice.amount;
+  //       const bPrice = b.staticPrice.amount;
+  //       const aRecommendation = a.recommendationScore;
+  //       const bRecommendation = b.recommendationScore;
+
+  //       if (aPrice === bPrice) {
+  //         return bRecommendation - aRecommendation;
+  //       }
+
+  //       return aPrice - bPrice;
+  //     });
+  //   } else if (sortOption === "Price Only") {
+  //     sortedData.sort((a, b) => a.staticPrice.amount - b.staticPrice.amount);
+  //   }
+
+  //   return sortedData;
+  // }
 
   return (
     <>

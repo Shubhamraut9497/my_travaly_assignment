@@ -8,7 +8,7 @@ import SearchItem from '../SearchItem/SearchItem'
 function List() {
   const location = useLocation();
   const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const [reg_date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
 
@@ -25,13 +25,13 @@ function List() {
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                reg_date[0].startDate,
                 "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(reg_date[0].endDate, "MM/dd/yyyy")}`}</span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}
-                  ranges={date}
+                  ranges={reg_date}
                   minDate={new Date()}
                 />
               )}
@@ -84,7 +84,7 @@ function List() {
           </div>
           {/* In this we have called a SearchItem component and passed a data as a props */}
           <div className="listResult">
-            <SearchItem options={options} date={date} destination={destination.charAt(0).toUpperCase()+destination.slice(1)}/>
+            <SearchItem options={options} registration_date={reg_date} destination={destination.toLowerCase()}/>
           </div>
         </div>
       </div>

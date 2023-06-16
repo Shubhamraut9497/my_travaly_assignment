@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Register/Register'
 
+
 function App() {
   return (
     <div className="App">
