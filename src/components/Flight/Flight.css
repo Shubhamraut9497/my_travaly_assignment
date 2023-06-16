@@ -1,0 +1,36 @@
+.filghtElement{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    /* flex:0.2; */
+    border:3px solid #febb02;
+}
+
+.flightInput{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.ico{
+    color:gray;
+    padding-right:10px;
+    /* background-color:rgb(230, 222, 222) ; */
+    
+}
+.inputs{
+    outline:none;
+    /* color:gray; */
+    border:none;
+    height:37px;
+    /* background-color: rgb(230, 222, 222); */
+    flex:0.4;
+}
+.date{
+    position: absolute;
+    top:-140px;
+    margin-top:360px;
+    z-index: 2;
+}
+
+

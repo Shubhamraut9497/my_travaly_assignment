@@ -1,0 +1,51 @@
+.Gl{
+    width:100%; 
+    max-width: 1024px;
+    display:flex;
+    justify-content: space-between;
+   flex-direction: row;
+   flex-wrap: wrap;
+    gap:20px;
+}
+.GlItem{
+    text-align: left;
+    flex:1;
+    gap:10px;
+    display:flex;
+    flex-direction: row;
+    color:rgb(0, 0, 0);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor:pointer; 
+}
+.glImg{
+    height:250px;
+    width:100px;
+    border-radius:20px solid white;
+    overflow: hidden;
+    
+}
+.glName{
+    font-weight: bold ;
+    font-size: 20px;
+}
+.glCity{
+    font-weight: 300;
+}
+.glPrice{
+    font-weight: 600;
+    margin-top: 50px;
+}
+.glRating>button{
+    background-color: #003584;
+    color:white;
+    border: none;
+    padding: 3px;
+    margin-right: 10px;
+    margin-top: 30px;
+}
+.select_tag_heading{
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+}

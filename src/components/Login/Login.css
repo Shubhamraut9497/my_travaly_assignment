@@ -1,0 +1,35 @@
+.log-ele{
+    /* width:300px; */
+    border:1px solid gray;
+}
+.containers{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}.siCbutton{
+    border:none;
+    background-color:  #003584;
+    color:white;
+}
+.inputs{
+    border: none;
+    outline:none;
+
+}
+.ic{
+    color: gray;
+    margin-right:30px;
+}
+.log-ele{
+    margin-top: 30px;
+}
+.cld{
+    cursor:pointer;
+}
+.login{
+    margin-top:100px;
+}
+.signup{
+    cursor:pointer;
+    color:rgb(31, 31, 73)
+}
