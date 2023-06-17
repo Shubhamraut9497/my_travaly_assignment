@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./SearchItem.css";
-import { useNavigate} from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import Loader from "../Loading/Loader";
 
-function SearchItem({ options, registration_date, destination }) {
+function SearchItem({ options, registration_date, destination,searchType }) {
   const [hotelData, setHotelData] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   // In this component we are trying to show data according to the user requirement like whenever user will search for
   // hotels then he can be able to see on this hotel page
   // const location=useLocation();
+  const navigate=useNavigate();
   let startDate =
     registration_date[0].startDate.getFullYear() +
     "-" +
@@ -60,7 +62,9 @@ function SearchItem({ options, registration_date, destination }) {
         }),
       }
     );
+    
     const response = await searchHotelData.json();
+    setLoading(false);
     // console.log(response);
     const hotelList = response?.data?.arrayOfHotelList || [];
     setHotelData(hotelList);
@@ -72,7 +76,8 @@ function SearchItem({ options, registration_date, destination }) {
   return (
     <>
       <div className="searchItem mx-3">
-        {hotelData?.map((hotel) => {
+        {loading ?<Loader/>:(<>
+          {hotelData?.map((hotel) => {
           return (
             <>
               <container>
@@ -101,10 +106,18 @@ function SearchItem({ options, registration_date, destination }) {
                         {hotel.availableDeals[0].headerName}
                       </span>
                       <span className="siSubtitle">
-                        Studio Appartment with Air Comditioning
+                        {
+                          hotel.propertyPoliciesAndAmmenities?.data
+                            ?.cancelPolicy
+                        }
                       </span>
                       <span className="sFeature"></span>
-                      <span className="siCancel">Free Cancelation</span>
+                      <span className="siCancel">
+                        {hotel.googleReview?.data?.totalUserRating
+                          ? "total user ratings " +
+                            hotel.googleReview?.data?.totalUserRating
+                          : "total user ratings " + 0}
+                      </span>
                       <span className="sCancelOpSub"></span>
                     </div>
                     <div className="siDetail">
@@ -119,7 +132,7 @@ function SearchItem({ options, registration_date, destination }) {
                           {hotel.simplPriceList.simplPrice.displayAmount}
                         </span>
                         <span className="siTaxOp">Includes Taxes and fees</span>
-                        <button className="siCbutton">Book now</button>
+                        <button className="siCbutton" onClick={()=>navigate("/hotelInfo",{state:{hotelCode:hotel.propertyCode}})}>Book now</button>
                       </div>
                     </div>
                   </div>
@@ -128,6 +141,8 @@ function SearchItem({ options, registration_date, destination }) {
             </>
           );
         })}
+        </>)}
+        
       </div>
     </>
   );

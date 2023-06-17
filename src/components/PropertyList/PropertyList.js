@@ -1,8 +1,15 @@
 import React from "react";
 import "./PropertyList.css";
 function PropertyList() {
+  const scrollToElement = () => {
+    // this function is used to scroll user to the main page where input field is mentioned
+    const element = document.getElementById("scrollTarget");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
-    <div className="pList">
+    <div className="pList" onClick={scrollToElement}>
       <div className="pListItem">
         <img
           src="https://r-xx.bstatic.com/xdata/images/xphoto/300x240/57584488.jpeg?k=d8d4706fc72ee789d870eb6b05c0e546fd4ad85d72a3af3e30fb80ca72f0ba57&o="

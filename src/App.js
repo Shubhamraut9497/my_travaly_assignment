@@ -7,8 +7,7 @@ import FlightRes from './components/FlightResult/FlightRes'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Register/Register'
-
-
+import HotelInfo from "./components/HotelInfo/HotelInfo";
 function App() {
   return (
     <div className="App">
@@ -16,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/hotels" element={<Hotels/>}/>
-          <Route path="/flights" element={<Flight/>}/>
+          <Route path="/hotelInfo" element={<HotelInfo/>}/>
           <Route path="/searchFlights" element={<FlightRes/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
