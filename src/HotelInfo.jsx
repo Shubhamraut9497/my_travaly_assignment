@@ -45,7 +45,7 @@ function HotelInfo() {
         ) : (
           <container>
             {hotelInfo && hotelInfo.data ? (
-              <div className="hotel_details border">
+              <div className="border">
                 <div>
                   {hotelInfo.data.propertyImage && (
                     <img
@@ -55,11 +55,10 @@ function HotelInfo() {
                     />
                   )}
                 </div>
-                <div className="mx-3 rightData">
+                <div className="mx-3 ">
                   <div className="SiDesc">
                     <h1 className="siTitle">{hotelInfo.data.propertyName}</h1>
                     <div>
-                        Reviews
                       {`${hotelInfo.data.propertyAddress.street}, ${hotelInfo.data.propertyAddress.zipcode}, ${hotelInfo.data.propertyAddress.map_address}`}
                     </div>
                     <span className="siDistnce">
@@ -73,29 +72,19 @@ function HotelInfo() {
                     </span>
                     <span className="sFeature"></span>
                     <span className="siCancel">
+                    <h2>Reviews</h2>
                       {hotelInfo.data.googleReview?.data?.arrayOfReviews.map((review) => (
-                        <div key={review.author_name}>
-                          <div>{review.author_name}</div>
-                          <div>url: {review.author_url}</div>
-                          <img src={review.profile_photo_url} alt="img" />
-                          <div>{review.text}</div>
+                        <div key={review.author_name} >
+                          <h4 className='mt-3'>{review.author_name}</h4>
+                          <div className='mb-3'> {"url:" + review.author_url}</div>
+                          <div className='d-flex justify-content-between align-items-center'>
+                            <img src={review.profile_photo_url} alt="img" />
+                            <div className='m-3'>{review.text}</div>
+                          </div>
                         </div>
                       ))}
                     </span>
                     <span className="sCancelOpSub"></span>
-                  </div>
-                  <div className="siDetail">
-                    <div className="siRating">
-                      <span>Excellent</span>
-                      <button>
-                        {hotelInfo.data.googleReview?.data?.overallRating ?? 0}
-                      </button>
-                    </div>
-                    <div className="detailText">
-                      <span className="siPrice">
-                        {hotelInfo.data.simplPriceList?.simplPrice.displayAmount}
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>
