@@ -4,7 +4,7 @@ import { BsPersonFill } from "react-icons/bs";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import { addDays } from "date-fns";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { BiBed } from "react-icons/bi";
 import "./SearchBar.css";
 import parseJSON from "date-fns/parseJSON/index";
@@ -33,7 +33,7 @@ function SearchBar() {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: addDays(new Date(), 1),
+      endDate: new Date(),
       key: "selection",
     },
   ]);
@@ -41,9 +41,7 @@ function SearchBar() {
   const [openOptions, setOpenOptions] = useState(false);
   // In this component i have called a search autocomplete api to suggest user about what he/she is searching
   // i have stored this data in one variable known as autoComplete
-  const handleSearch = () => {
-    navigate("/hotels", { state: { destination, date, options } });
-  };
+
   const searchData = async () => {
     const search_data_api = await fetch(
       "https://api.mytravaly.com/testing/v1/",
@@ -57,7 +55,7 @@ function SearchBar() {
         body: JSON.stringify({
           action: "searchAutoComplete",
           searchAutoComplete: {
-            inputText: destination ? destination : "indi",
+            inputText: destination.length===0?"ind":destination,
             searchType: [
               "byCity",
               "byState",
@@ -75,8 +73,16 @@ function SearchBar() {
     console.log(response);
   };
   const handleDestination = (e) => {
+    const inputText = e.target.value;
     setDestination(e.target.value);
     searchData();
+    if (!inputText.includes("calendar") && !inputText.includes("option")) {
+      setOpenDate(false);
+      setOpenOptions(false);
+    }
+  };
+  const handleSearch = () => {
+    navigate("/hotels", { state: { destination, date, options } });
   };
 
   return (
@@ -95,6 +101,7 @@ function SearchBar() {
               list="browsers"
               id="browser"
               name="browser"
+              style={{ width: "100%" }}
               onChange={handleDestination}
             />
             {autoComplete &&
@@ -183,7 +190,7 @@ function SearchBar() {
               )}
           </div>
         </div>
-        <div className="headerSearchItem">
+        <div className="headerSearchItem" onClick={() => setOpenOptions(false)}>
           <span className="headerIcon">
             <FcCalendar />
           </span>
@@ -192,24 +199,23 @@ function SearchBar() {
             onClick={() => {
               setOpenDate(!openDate);
             }}
-          >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+          >{`${format(date[0].startDate, "dd-MM-yyyy")} to ${format(
             date[0].endDate,
-            "MM/dd/yyyy"
+            "dd-MM-yyyy"
           )}`}</span>
           {openDate && (
             <DateRange
               editableDateInputs={true}
               onChange={(item) => {
-                const startDate = item.selection.startDate;
-                const endDate = addDays(startDate, 1); // Calculate the end date as start date + 1 day
-
+                const newDateRange = item.selection;
+                const startDate = newDateRange.startDate;
+                const endDate = addDays(newDateRange.endDate, 1); // Add 1 day to the end date
                 setDate([
                   {
-                    startDate: startDate,
+                    ...newDateRange,
                     endDate: endDate,
-                    key: "selection",
                   },
-                ]);
+                ])
               }}
               moveRangeOnFirstSelection={false}
               ranges={date}
@@ -218,7 +224,12 @@ function SearchBar() {
             />
           )}
         </div>
-        <div className="headerSearchItem">
+        <div
+          className="headerSearchItem"
+          onClick={() => {
+            setOpenDate(false);
+          }}
+        >
           <span className="headerIcon">
             <BsPersonFill />
           </span>
