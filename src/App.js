@@ -7,7 +7,7 @@ import FlightRes from './components/FlightResult/FlightRes'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Register/Register'
-import HotelInfo from "./components/HotelInfo/HotelInfo";
+import HotelInfo from "./HotelInfo";
 function App() {
   return (
     <div className="App">
