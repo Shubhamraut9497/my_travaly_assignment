@@ -3,7 +3,7 @@ import "./List.css";
 import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
-import SearchItem from '../SearchItem/SearchItem'
+import SearchItem from "../SearchItem/SearchItem";
 
 function List() {
   const location = useLocation();
@@ -11,7 +11,6 @@ function List() {
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
-
   return (
     <div>
       <div className="listContainer">
@@ -84,7 +83,7 @@ function List() {
           </div>
           {/* In this we have called a SearchItem component and passed a data as a props */}
           <div className="listResult">
-            <SearchItem options={options} date={date} destination={destination.charAt(0).toUpperCase()+destination.slice(1)}/>
+            <SearchItem options={options} registration_date={date} destination={destination.toLowerCase()} />
           </div>
         </div>
       </div>
