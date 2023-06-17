@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './HotelInfo.css';
 import { useLocation } from 'react-router-dom';
-import Loader from '../Loading/Loader';
+import Loader from './components/Loading/Loader';
 
 function HotelInfo() {
   const location = useLocation();
