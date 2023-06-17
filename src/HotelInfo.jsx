@@ -39,7 +39,7 @@ function HotelInfo() {
 
   return (
     <>
-      <div className="searchItem mx-3">
+      <div className="searchItem mx-3 container">
         {loading ? (
           <Loader />
         ) : (
@@ -70,14 +70,13 @@ function HotelInfo() {
                     <span className="siSubtitle">
                       {hotelInfo.data.propertyPoliciesAndAmmenities?.data?.cancelPolicy}
                     </span>
-                    <span className="sFeature"></span>
                     <span className="siCancel">
                     <h2>Reviews</h2>
                       {hotelInfo.data.googleReview?.data?.arrayOfReviews.map((review) => (
                         <div key={review.author_name} >
                           <h4 className='mt-3'>{review.author_name}</h4>
                           <div className='mb-3'> {"url:" + review.author_url}</div>
-                          <div className='d-flex justify-content-between align-items-center'>
+                          <div >
                             <img src={review.profile_photo_url} alt="img" />
                             <div className='m-3'>{review.text}</div>
                           </div>
